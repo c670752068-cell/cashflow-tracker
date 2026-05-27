@@ -13,11 +13,11 @@ interface TransactionsTableProps {
 }
 
 const TYPE_OPTIONS: { value: TxType; label: string }[] = [
-  { value: 'income', label: '收入' },
-  { value: 'expense', label: '支出' },
-  { value: 'transfer', label: '转账' },
-  { value: 'invest_buy', label: '投资买入' },
-  { value: 'invest_sell', label: '投资卖出' },
+  { value: 'income', label: '💰 收入' },
+  { value: 'expense', label: '🛒 支出' },
+  { value: 'transfer', label: '🔄 转账' },
+  { value: 'invest_buy', label: '📈 投资买入' },
+  { value: 'invest_sell', label: '📉 投资卖出' },
 ];
 
 const SIGN_CLASS: Record<TxType, string> = {
@@ -104,8 +104,8 @@ export function TransactionsTable({
 
   if (accounts.length === 0) {
     return (
-      <div className="rounded-xl border border-dashed border-slate-300 p-6 text-center text-sm text-slate-500 dark:border-slate-700">
-        请先在「账户」标签创建至少一个账户。
+      <div className="rounded-2xl border border-dashed border-rose-300 bg-white/60 p-6 text-center text-sm text-rose-500 dark:border-slate-700 dark:bg-slate-800/60">
+        🏦 请先到「账户」标签创建至少一个账户～
       </div>
     );
   }
@@ -114,7 +114,7 @@ export function TransactionsTable({
     <div className="space-y-4">
       <form
         onSubmit={submit}
-        className="grid grid-cols-2 gap-2 rounded-xl border border-slate-200 bg-white p-3 dark:border-slate-700 dark:bg-slate-800 sm:grid-cols-7"
+        className="grid grid-cols-2 gap-2 rounded-2xl border border-white/60 bg-white/80 p-3 shadow-md shadow-rose-100/50 backdrop-blur dark:border-slate-700/60 dark:bg-slate-800/80 sm:grid-cols-7"
       >
         <input
           type="date"
@@ -191,9 +191,9 @@ export function TransactionsTable({
         />
         <button
           type="submit"
-          className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-medium text-white hover:bg-indigo-500"
+          className="rounded-full bg-gradient-to-r from-rose-500 to-pink-500 px-4 py-2 text-sm font-medium text-white shadow-md shadow-rose-300/50 hover:shadow-lg"
         >
-          添加
+          ✨ 添加
         </button>
       </form>
 
@@ -227,8 +227,8 @@ export function TransactionsTable({
       </div>
 
       {filtered.length === 0 ? (
-        <div className="rounded-xl border border-dashed border-slate-300 p-6 text-center text-sm text-slate-500 dark:border-slate-700">
-          没有匹配的流水。
+        <div className="rounded-2xl border border-dashed border-rose-300 bg-white/60 p-6 text-center text-sm text-rose-500 dark:border-slate-700 dark:bg-slate-800/60">
+          🔍 没有匹配的流水
         </div>
       ) : (
         <div className="overflow-x-auto rounded-xl border border-slate-200 bg-white dark:border-slate-700 dark:bg-slate-800">
@@ -298,7 +298,7 @@ export function TransactionsTable({
 }
 
 const inputCls =
-  'rounded-md border border-slate-300 bg-white px-2 py-1.5 text-sm placeholder:text-slate-400 focus:border-indigo-500 focus:outline-none dark:border-slate-600 dark:bg-slate-900';
+  'rounded-xl border border-rose-200/70 bg-white/80 px-2.5 py-1.5 text-sm placeholder:text-slate-400 focus:border-rose-400 focus:outline-none focus:ring-2 focus:ring-rose-200 dark:border-slate-600 dark:bg-slate-900';
 
 function Th({ children, className }: { children?: React.ReactNode; className?: string }) {
   return <th className={`px-3 py-2 text-left ${className ?? ''}`}>{children}</th>;

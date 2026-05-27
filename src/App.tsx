@@ -99,30 +99,33 @@ export default function App() {
 
   return (
     <div className="mx-auto min-h-full max-w-5xl px-3 py-4 sm:px-6">
-      <header className="mb-4 flex items-center justify-between gap-2">
-        <div>
-          <h1 className="text-xl font-bold sm:text-2xl">我的现金流</h1>
-          <p className="text-xs text-slate-500">本地存储 · 不上传 · 手机/桌面通用</p>
+      <header className="mb-5 rounded-3xl bg-gradient-to-br from-pink-400 via-rose-400 to-orange-300 px-5 py-4 text-white shadow-lg shadow-rose-200/60 dark:shadow-rose-900/30">
+        <div className="flex items-center gap-2">
+          <span className="text-2xl">💰</span>
+          <h1 className="text-xl font-bold drop-shadow-sm sm:text-2xl">我的现金流</h1>
+          <span className="text-xl">✨</span>
         </div>
-        <nav className="flex flex-wrap gap-1 text-xs sm:text-sm">
-          <TabBtn label="总览" active={tab === 'dashboard'} onClick={() => setTab('dashboard')} />
-          <TabBtn label="流水" active={tab === 'transactions'} onClick={() => setTab('transactions')} />
-          <TabBtn label="账户" active={tab === 'accounts'} onClick={() => setTab('accounts')} />
-          <TabBtn label="分析" active={tab === 'analysis'} onClick={() => setTab('analysis')} />
-          <TabBtn label="设置" active={tab === 'settings'} onClick={() => setTab('settings')} />
-        </nav>
+        <p className="mt-1 text-xs text-white/85">本地存储 · 不上传 · 手机和电脑都能开 🌈</p>
       </header>
+
+      <nav className="mb-5 flex flex-wrap gap-2 text-xs sm:text-sm">
+        <TabBtn icon="📊" label="总览" active={tab === 'dashboard'} onClick={() => setTab('dashboard')} />
+        <TabBtn icon="💸" label="流水" active={tab === 'transactions'} onClick={() => setTab('transactions')} />
+        <TabBtn icon="🏦" label="账户" active={tab === 'accounts'} onClick={() => setTab('accounts')} />
+        <TabBtn icon="🔍" label="分析" active={tab === 'analysis'} onClick={() => setTab('analysis')} />
+        <TabBtn icon="⚙️" label="设置" active={tab === 'settings'} onClick={() => setTab('settings')} />
+      </nav>
 
       {tab === 'dashboard' && (
         <section className="space-y-4">
           <Summary totals={totals} thisMonth={thisMonth} />
-          <div className="rounded-xl border border-slate-200 bg-white p-3 dark:border-slate-700 dark:bg-slate-800">
+          <Card>
             <BalanceCurve state={state} />
-          </div>
-          <div className="rounded-xl border border-slate-200 bg-white p-3 dark:border-slate-700 dark:bg-slate-800">
-            <h3 className="mb-2 text-sm font-semibold">最近 10 条流水</h3>
+          </Card>
+          <Card>
+            <h3 className="mb-2 text-sm font-semibold">🕒 最近 10 条流水</h3>
             <RecentTransactions state={state} />
-          </div>
+          </Card>
         </section>
       )}
 
@@ -152,17 +155,17 @@ export default function App() {
 
       {tab === 'analysis' && (
         <section className="space-y-4">
-          <div className="rounded-xl border border-slate-200 bg-white p-3 dark:border-slate-700 dark:bg-slate-800">
-            <h3 className="mb-2 text-sm font-semibold">近 6 月收支</h3>
+          <Card>
+            <h3 className="mb-2 text-sm font-semibold">📈 近 6 月收支</h3>
             <MonthlyBarChart data={monthly} />
-          </div>
-          <div className="rounded-xl border border-slate-200 bg-white p-3 dark:border-slate-700 dark:bg-slate-800">
+          </Card>
+          <Card>
             <ExpenseByCategory state={state} />
-          </div>
-          <div className="rounded-xl border border-slate-200 bg-white p-3 dark:border-slate-700 dark:bg-slate-800">
-            <h3 className="mb-2 text-sm font-semibold">本地财务诊断</h3>
+          </Card>
+          <Card>
+            <h3 className="mb-2 text-sm font-semibold">🩺 本地财务诊断</h3>
             <RiskList findings={findings} />
-          </div>
+          </Card>
           <AnalysisPanel settings={settings} state={state} localFindings={findings} />
         </section>
       )}
@@ -186,24 +189,33 @@ export default function App() {
         </section>
       )}
 
-      <footer className="mt-8 text-center text-xs text-slate-400">
-        数据保存在浏览器 localStorage；清除浏览器数据会丢失。建议定期导出 JSON 备份。
+      <footer className="mt-8 text-center text-xs text-rose-400/70">
+        🌸 数据存在浏览器 localStorage · 清浏览器数据会丢失 · 记得偶尔导出 JSON 备份 🌸
       </footer>
     </div>
   );
 }
 
-function TabBtn({ label, active, onClick }: { label: string; active: boolean; onClick: () => void }) {
+function Card({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="rounded-2xl border border-white/60 bg-white/80 p-4 shadow-md shadow-rose-100/50 backdrop-blur dark:border-slate-700/60 dark:bg-slate-800/80 dark:shadow-slate-900/40">
+      {children}
+    </div>
+  );
+}
+
+function TabBtn({ icon, label, active, onClick }: { icon: string; label: string; active: boolean; onClick: () => void }) {
   return (
     <button
       onClick={onClick}
-      className={`rounded-md px-3 py-1.5 font-medium transition ${
+      className={`flex items-center gap-1.5 rounded-full px-3.5 py-1.5 font-medium transition ${
         active
-          ? 'bg-indigo-600 text-white'
-          : 'bg-slate-100 text-slate-700 hover:bg-slate-200 dark:bg-slate-700 dark:text-slate-100 dark:hover:bg-slate-600'
+          ? 'bg-gradient-to-r from-rose-500 to-pink-500 text-white shadow-md shadow-rose-300/50'
+          : 'bg-white/70 text-slate-700 hover:bg-white hover:shadow-sm dark:bg-slate-700/60 dark:text-slate-100 dark:hover:bg-slate-700'
       }`}
     >
-      {label}
+      <span>{icon}</span>
+      <span>{label}</span>
     </button>
   );
 }
@@ -219,41 +231,47 @@ function RecentTransactions({ state }: RecentTransactionsProps) {
     .slice(0, 10);
 
   if (recent.length === 0) {
-    return <div className="text-sm text-slate-500">还没有流水。到「流水」标签录入。</div>;
+    return (
+      <div className="rounded-xl bg-rose-50/60 p-4 text-center text-sm text-rose-500 dark:bg-rose-900/20">
+        🌱 还没有流水。到「流水」标签记一笔吧～
+      </div>
+    );
   }
 
   const TYPE_LABEL: Record<Transaction['type'], string> = {
-    income: '收入',
-    expense: '支出',
-    transfer: '转账',
-    invest_buy: '买入',
-    invest_sell: '卖出',
+    income: '收入 💰',
+    expense: '支出 🛒',
+    transfer: '转账 🔄',
+    invest_buy: '买入 📈',
+    invest_sell: '卖出 📉',
   };
   const SIGN: Record<Transaction['type'], string> = {
     income: 'text-emerald-600',
-    expense: 'text-rose-600',
+    expense: 'text-rose-500',
     transfer: 'text-slate-500',
     invest_buy: 'text-amber-600',
     invest_sell: 'text-cyan-600',
   };
 
   return (
-    <ul className="divide-y divide-slate-100 text-sm dark:divide-slate-700">
+    <ul className="divide-y divide-rose-100/60 text-sm dark:divide-slate-700">
       {recent.map((t) => {
         const a = accountById.get(t.accountId);
         return (
-          <li key={t.id} className="flex items-center justify-between py-1.5">
+          <li key={t.id} className="flex items-center justify-between py-2">
             <div className="flex flex-col">
               <span>
-                <span className={`mr-2 text-xs ${SIGN[t.type]}`}>[{TYPE_LABEL[t.type]}]</span>
+                <span className={`mr-2 rounded-full bg-white/70 px-2 py-0.5 text-xs ${SIGN[t.type]} dark:bg-slate-700/60`}>
+                  {TYPE_LABEL[t.type]}
+                </span>
                 {t.category || (t.type === 'transfer' ? '账户间转账' : '未分类')}
                 {t.note && <span className="ml-2 text-xs text-slate-400">{t.note}</span>}
               </span>
-              <span className="text-xs text-slate-500">
+              <span className="mt-0.5 text-xs text-slate-500">
                 {t.date} · {a?.name ?? '?'}
               </span>
             </div>
-            <span className={`tabular-nums font-medium ${SIGN[t.type]}`}>
+            <span className={`tabular-nums font-semibold ${SIGN[t.type]}`}>
               {t.type === 'expense' || t.type === 'invest_buy' ? '-' : '+'}
               {t.amount.toFixed(2)} {a?.currency ?? ''}
             </span>
@@ -284,16 +302,16 @@ function ExpenseByCategory({ state }: ExpenseByCategoryProps) {
   return (
     <div>
       <div className="mb-3 flex flex-wrap items-center gap-2">
-        <h3 className="text-sm font-semibold">支出分类</h3>
+        <h3 className="text-sm font-semibold">🥧 支出分类</h3>
         <div className="ml-auto flex gap-1">
           {(['30', '90', '365', 'all'] as const).map((r) => (
             <button
               key={r}
               onClick={() => setRange(r)}
-              className={`rounded px-2 py-1 text-xs ${
+              className={`rounded-full px-2.5 py-1 text-xs font-medium transition ${
                 range === r
-                  ? 'bg-indigo-600 text-white'
-                  : 'bg-slate-100 text-slate-700 hover:bg-slate-200 dark:bg-slate-700 dark:text-slate-200'
+                  ? 'bg-gradient-to-r from-rose-500 to-pink-500 text-white shadow-sm shadow-rose-300/50'
+                  : 'bg-white/70 text-slate-700 hover:bg-white dark:bg-slate-700/60 dark:text-slate-200'
               }`}
             >
               {r === 'all' ? '全部' : `${r} 天`}
@@ -339,23 +357,23 @@ function DataActions({ onExport, onImport, onReset }: DataActionsProps) {
     e.target.value = '';
   }
   return (
-    <div className="space-y-2 rounded-xl border border-slate-200 bg-white p-3 dark:border-slate-700 dark:bg-slate-800">
-      <h3 className="text-sm font-semibold">数据导入 / 导出</h3>
-      <div className="flex flex-wrap gap-2">
-        <button onClick={onExport} className="rounded-md bg-slate-100 px-3 py-1.5 text-sm dark:bg-slate-700">
-          导出 JSON
+    <Card>
+      <h3 className="text-sm font-semibold">📦 数据导入 / 导出</h3>
+      <div className="mt-2 flex flex-wrap gap-2">
+        <button onClick={onExport} className="rounded-full bg-sky-100 px-4 py-1.5 text-sm text-sky-700 hover:bg-sky-200 dark:bg-sky-900/40 dark:text-sky-200">
+          ⬇️ 导出 JSON
         </button>
-        <label className="cursor-pointer rounded-md bg-slate-100 px-3 py-1.5 text-sm dark:bg-slate-700">
-          导入 JSON
+        <label className="cursor-pointer rounded-full bg-emerald-100 px-4 py-1.5 text-sm text-emerald-700 hover:bg-emerald-200 dark:bg-emerald-900/40 dark:text-emerald-200">
+          ⬆️ 导入 JSON
           <input type="file" accept="application/json" className="hidden" onChange={handleFile} />
         </label>
         <button
           onClick={onReset}
-          className="rounded-md bg-rose-100 px-3 py-1.5 text-sm text-rose-700 dark:bg-rose-900/40 dark:text-rose-200"
+          className="rounded-full bg-rose-100 px-4 py-1.5 text-sm text-rose-700 hover:bg-rose-200 dark:bg-rose-900/40 dark:text-rose-200"
         >
-          重置数据
+          🗑️ 重置数据
         </button>
       </div>
-    </div>
+    </Card>
   );
 }

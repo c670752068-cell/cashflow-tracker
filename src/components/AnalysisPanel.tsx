@@ -35,15 +35,15 @@ export function AnalysisPanel({ settings, state, localFindings }: AnalysisPanelP
   const disabled = loading || state.transactions.length === 0;
 
   return (
-    <div className="space-y-3 rounded-xl border border-slate-200 bg-white p-3 dark:border-slate-700 dark:bg-slate-800">
+    <div className="space-y-3 rounded-2xl border border-white/60 bg-white/80 p-4 shadow-md shadow-rose-100/50 backdrop-blur dark:border-slate-700/60 dark:bg-slate-800/80">
       <div className="flex items-center justify-between gap-3">
-        <h3 className="text-sm font-semibold">Kimi 财务深度分析</h3>
+        <h3 className="text-sm font-semibold">🤖 Kimi 财务深度分析</h3>
         <button
           onClick={run}
           disabled={disabled}
-          className="rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-indigo-500 disabled:cursor-not-allowed disabled:bg-slate-400"
+          className="rounded-full bg-gradient-to-r from-rose-500 to-pink-500 px-4 py-1.5 text-sm font-medium text-white shadow-md shadow-rose-300/50 hover:shadow-lg disabled:cursor-not-allowed disabled:bg-slate-400 disabled:from-slate-400 disabled:to-slate-400 disabled:shadow-none"
         >
-          {loading ? '分析中…' : '调用 Kimi 分析'}
+          {loading ? '✨ 分析中…' : '✨ 调用 Kimi 分析'}
         </button>
       </div>
       {!settings.kimiApiKey && (

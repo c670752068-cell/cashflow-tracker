@@ -42,8 +42,8 @@ export function SettingsPanel({
 
   return (
     <div className="space-y-4">
-      <div className="space-y-3 rounded-xl border border-slate-200 bg-white p-3 dark:border-slate-700 dark:bg-slate-800">
-        <h3 className="text-sm font-semibold">Kimi 设置</h3>
+      <div className="space-y-3 rounded-2xl border border-white/60 bg-white/80 p-4 shadow-md shadow-rose-100/50 backdrop-blur dark:border-slate-700/60 dark:bg-slate-800/80">
+        <h3 className="text-sm font-semibold">🤖 Kimi 设置</h3>
         <Field label="Kimi API Key（Moonshot）">
           <input
             type="password"
@@ -75,14 +75,14 @@ export function SettingsPanel({
         </Field>
         <button
           onClick={saveSettings}
-          className="rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-indigo-500"
+          className="rounded-full bg-gradient-to-r from-rose-500 to-pink-500 px-4 py-1.5 text-sm font-medium text-white shadow-md shadow-rose-300/50 hover:shadow-lg"
         >
           {saved ? '已保存 ✓' : '保存设置'}
         </button>
       </div>
 
-      <div className="space-y-3 rounded-xl border border-slate-200 bg-white p-3 dark:border-slate-700 dark:bg-slate-800">
-        <h3 className="text-sm font-semibold">分类管理</h3>
+      <div className="space-y-3 rounded-2xl border border-white/60 bg-white/80 p-4 shadow-md shadow-rose-100/50 backdrop-blur dark:border-slate-700/60 dark:bg-slate-800/80">
+        <h3 className="text-sm font-semibold">🏷️ 分类管理</h3>
         <form onSubmit={addCategory} className="grid grid-cols-3 gap-2">
           <input
             value={newCatName}
@@ -99,8 +99,8 @@ export function SettingsPanel({
             <option value="expense">支出</option>
             <option value="invest">投资</option>
           </select>
-          <button type="submit" className="rounded-md bg-indigo-600 px-3 py-1.5 text-sm text-white hover:bg-indigo-500">
-            添加
+          <button type="submit" className="rounded-full bg-gradient-to-r from-rose-500 to-pink-500 px-4 py-1.5 text-sm font-medium text-white shadow-md shadow-rose-300/50 hover:shadow-lg">
+            ✨ 添加
           </button>
         </form>
         {(['income', 'expense', 'invest'] as const).map((g) => (
@@ -112,7 +112,7 @@ export function SettingsPanel({
               {grouped[g].map((c) => (
                 <span
                   key={c.id}
-                  className="inline-flex items-center gap-1 rounded-full bg-slate-100 px-2 py-0.5 text-xs dark:bg-slate-700"
+                  className="inline-flex items-center gap-1 rounded-full bg-rose-100/70 px-3 py-1 text-xs text-rose-700 dark:bg-rose-900/30 dark:text-rose-200"
                 >
                   {c.name}
                   <button
@@ -134,7 +134,7 @@ export function SettingsPanel({
 }
 
 const inputCls =
-  'w-full rounded-md border border-slate-300 bg-white px-2 py-1.5 text-sm focus:border-indigo-500 focus:outline-none dark:border-slate-600 dark:bg-slate-900';
+  'w-full rounded-xl border border-rose-200/70 bg-white/80 px-2.5 py-1.5 text-sm focus:border-rose-400 focus:outline-none focus:ring-2 focus:ring-rose-200 dark:border-slate-600 dark:bg-slate-900';
 
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (

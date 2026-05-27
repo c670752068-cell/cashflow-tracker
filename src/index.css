@@ -18,15 +18,38 @@ body,
 
 body {
   margin: 0;
-  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue',
-    'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
-  background: #f7f8fa;
-  color: #1f2937;
+  font-family: 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui,
+    -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+  letter-spacing: 0.2px;
+  color: #2a1f3d;
+  background:
+    radial-gradient(at 8% 0%, #ffe4ec 0px, transparent 50%),
+    radial-gradient(at 92% 0%, #e0f2fe 0px, transparent 50%),
+    radial-gradient(at 50% 100%, #fef3c7 0px, transparent 55%),
+    #fff8f3;
+  min-height: 100vh;
 }
 
 @media (prefers-color-scheme: dark) {
   body {
-    background: #0b0d12;
-    color: #e5e7eb;
+    color: #f5e9ff;
+    background:
+      radial-gradient(at 8% 0%, #4a1d3d 0px, transparent 50%),
+      radial-gradient(at 92% 0%, #1d3a4a 0px, transparent 50%),
+      radial-gradient(at 50% 100%, #3d2e1a 0px, transparent 55%),
+      #14101c;
   }
+}
+
+/* Soft scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(244, 114, 182, 0.4);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(244, 114, 182, 0.7);
 }
